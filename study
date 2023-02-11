@@ -1224,39 +1224,33 @@ shell = [Question(w3_shell_c[0], w3_shell_q[i], w3_shell_a[i], w3_shell_f[i]) fo
 args = [Question(w3_args_c[0], w3_args_q[i], w3_args_a[i], w3_args_f[i]) for i in range(len(w3_args_q))]
 
 def sleep(seconds):
-    for i in range(seconds):
-        try:
-            time.sleep(1)
-        except KeyboardInterrupt:
-            break
+  for i in range(seconds):
+    try:
+      time.sleep(1)
+    except KeyboardInterrupt:
+      break
 
-def run_quiz(questions):
-  score = 0
-  os.system('cls||clear')
-  for question in questions:
-    print(colored(question.consider + "\n", 'white'))
-    print(colored(question.prompt + "\n", 'white'))
-    answer = input("$ ")
-    if answer == question.answer:
-      score += 1
-      print(colored("\nThe correct answer is:\n", 'white'))
-      print(colored(question.answer + "\n", 'green'))
-    else:
-      print(colored("\nThe correct answer is:\n", 'white'))
-      print(colored(question.answer + "\n", 'red'))
-    sleep(1)
-    print(colored("----- Feedback -----", 'blue'))
-    print(colored(question.feedback, 'blue'))
-    sleep(30)
+def run_quiz(question_sets):
+  for questions in question_sets:
+    score = 0
     os.system('cls||clear')
-  print("you got", score, "out of", len(questions))
-  sleep(3)
+    for question in questions:
+      print(colored(question.consider + "\n", 'white'))
+      print(colored(question.prompt + "\n", 'white'))
+      answer = input("$ ")
+      if answer == question.answer:
+        score += 1
+        print(colored("\nThe correct answer is:\n", 'white'))
+        print(colored(question.answer + "\n", 'green'))
+      else:
+        print(colored("\nThe correct answer is:\n", 'white'))
+        print(colored(question.answer + "\n", 'red'))
+      sleep(1)
+      print(colored("----- Feedback -----", 'blue'))
+      print(colored(question.feedback, 'blue'))
+      input("Press enter to continue...")
+      os.system('cls||clear')
+    print("you got", score, "out of", len(questions))
 
-run_quiz(regexp)
-run_quiz(head)
-run_quiz(grep)
-run_quiz(cut)
-run_quiz(tr)
-run_quiz(sort)
-run_quiz(shell)
-run_quiz(args)
+run_quiz([regexp, head, grep, cut, tr, sort, shell, args])
+
