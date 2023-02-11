@@ -1,0 +1,79 @@
+#!/bin/python3
+
+import os
+import time
+from termcolor import colored
+
+class Question:
+  def __init__(self, consider, prompt, answer, feedback):
+    self.consider = consider
+    self.prompt = prompt
+    self.answer = answer
+    self.feedback = feedback
+
+part1_q = [
+"create an application called twitter",
+"when in the application folder, what is the command to run the application?"
+]
+
+part1_c = [
+"""
+ .----------------.  .----------------.  .----------------.  .----------------.  .----------------. 
+| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
+| |   ______     | || |      __      | || |  _______     | || |  _________   | || |     __       | |
+| |  |_   __ \   | || |     /  \     | || | |_   __ \    | || | |  _   _  |  | || |    /  |      | |
+| |    | |__) |  | || |    / /\ \    | || |   | |__) |   | || | |_/ | | \_|  | || |    `| |      | |
+| |    |  ___/   | || |   / ____ \   | || |   |  __ /    | || |     | |      | || |     | |      | |
+| |   _| |_      | || | _/ /    \ \_ | || |  _| |  \ \_  | || |    _| |_     | || |    _| |_     | |
+| |  |_____|     | || ||____|  |____|| || | |____| |___| | || |   |_____|    | || |   |_____|    | |
+| |              | || |              | || |              | || |              | || |              | |
+| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |
+ '----------------'  '----------------'  '----------------'  '----------------'  '----------------' """
+]
+
+part1_a = [
+"npx create-react-app twitter",
+"npm start",
+]
+
+part1_f = [
+"""
+step 1""",
+
+"""
+you should always have your app running and developer tools"""
+]
+
+
+part1 = [Question(part1_c[0], part1_q[i], part1_a[i], part1_f[i]) for i in range(len(part1_q))]
+
+def sleep(seconds):
+    for i in range(seconds):
+        try:
+            time.sleep(1)
+        except KeyboardInterrupt:
+            break
+
+def run_quiz(questions):
+  score = 0
+  os.system('cls||clear')
+  for question in questions:
+    print(colored(question.consider + "\n", 'white'))
+    print(colored(question.prompt + "\n", 'white'))
+    answer = input("$ ")
+    if answer == question.answer:
+      score += 1
+      print(colored("\nThe correct answer is:\n", 'white'))
+      print(colored(question.answer + "\n", 'green'))
+    else:
+      print(colored("\nThe correct answer is:\n", 'white'))
+      print(colored(question.answer + "\n", 'red'))
+    sleep(1)
+    print(colored("----- Feedback -----", 'blue'))
+    print(colored(question.feedback, 'blue'))
+    sleep(30)
+    os.system('cls||clear')
+  print("you got", score, "out of", len(questions))
+  sleep(3)
+
+run_quiz(part1)
