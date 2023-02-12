@@ -22,16 +22,51 @@ The use of design patterns in software development provides several benefits, in
 
     Flexibility: Design patterns are flexible solutions that can be adapted to meet the specific needs of a particular project. By using design patterns, software developers can create software systems that are flexible, scalable, and adaptable to changing requirements.
 
+Creational Patterns:
+
+    Abstract Factory
+    Builder
+    Factory Method
+    Prototype
+    Singleton
+
+Structural Patterns:
+
+    Adapter
+    Bridge
+    Composite
+    Decorator
+    Facade
+    Flyweight
+    Proxy
+
+Behavioral Patterns:
+
+    Chain of Responsibility
+    Command
+    Interpreter
+    Iterator
+    Mediator
+    Memento
+    Observer
+    State
+    Strategy
+    Template Method
+    Visitor
 
 Creational patterns are design patterns that deal with the process of object creation. The primary goal of creational patterns is to provide a solution to the problem of creating objects in a manner suitable to the situation, while hiding the implementation details from the client. In other words, creational patterns aim to abstract the process of object creation and provide a way for the client to create objects without knowing how the objects are actually created.
 
 Some of the most commonly used creational patterns include:
+
+    Builder: The Builder pattern separates the construction of a complex object from its representation, allowing the same construction process to create different representations. This pattern is useful when you want to create objects that are composed of many different parts, and where the process of creating these objects can be complex. An example usage of the Builder pattern might be a car factory that builds cars using a standard set of steps, but allows the customer to choose different options to customize the car.
 
     Singleton: The Singleton pattern ensures that a class has only one instance, while providing a global point of access to this instance. This pattern is useful when you need to ensure that a class only has one instance, and that this instance is easily accessible from anywhere in the system. An example usage of the Singleton pattern might be a database connection manager that ensures that there is only one connection to the database, and that this connection is easily accessible from anywhere in the system.
 
     Factory Method: The Factory Method pattern provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created. This pattern is useful when you want to encapsulate the process of object creation, but still allow subclasses to specify the type of objects that are created. An example usage of the Factory Method pattern might be a graphics application that provides a factory method for creating shapes, but allows subclasses to specify the type of shapes that are created (e.g. circles, rectangles, etc.).
 
     Abstract Factory: The Abstract Factory pattern provides a way to create families of related objects without specifying their concrete classes. This pattern is useful when you want to create objects that are related to one another, but do not want to specify the exact classes of these objects. An example usage of the Abstract Factory pattern might be a game engine that provides an abstract factory for creating game objects, but allows subclasses to specify the exact types of game objects that are created (e.g. characters, weapons, etc.).
+
+    Prototype: The Prototype pattern creates new objects by cloning an existing object, rather than creating new objects from scratch. This pattern is useful when you want to create objects that are similar to existing objects, but with some modifications. An example usage of the Prototype pattern might be a document editor that allows users to create new documents based on existing templates, but with the ability to modify the content of the new document.
 
 These are just a few examples of creational patterns, and there are many others as well. Creational patterns provide a way to encapsulate the process of object creation and provide a way for the client to create objects without knowing how the objects are actually created. By using creational patterns, software developers can create more flexible and maintainable software systems.
 
@@ -45,6 +80,14 @@ Some of the most commonly used structural patterns include:
     Bridge: The Bridge pattern decouples an abstraction from its implementation, allowing both to vary independently. This pattern is useful when you want to create a system that can easily be modified and scaled, without changing the underlying implementation. An example usage of the Bridge pattern might be a graphics engine that provides a bridge between the abstract representation of a scene and the underlying implementation of the graphics engine.
 
     Decorator: The Decorator pattern allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class. This pattern is useful when you want to add new functionality to an object, but do not want to change the underlying class. An example usage of the Decorator pattern might be a web page that allows users to add new widgets and decorations to a page, without changing the underlying HTML code.
+
+    Composite: The Composite pattern allows you to compose objects into tree structures to represent part-whole hierarchies. This pattern is useful when you want to create a system that treats individual objects and compositions of objects in a uniform manner. An example usage of the Composite pattern might be a file system that treats files and directories in a uniform manner, allowing the user to operate on either a single file or a group of files in the same way.
+
+    Facade: The Facade pattern provides a simplified interface to a complex system, hiding the implementation details. This pattern is useful when you want to create a system that is easy to use, but that still provides access to the underlying functionality when needed. An example usage of the Facade pattern might be a library that provides a simple interface to a complex data storage system, allowing the client to store and retrieve data without having to know the details of the underlying storage system.
+
+    Flyweight: The Flyweight pattern uses sharing to support large numbers of fine-grained objects efficiently. This pattern is useful when you want to create a system that can manage a large number of objects, but where the memory overhead of creating these objects is too high. An example usage of the Flyweight pattern might be a game that manages a large number of characters, but where the characters are similar to one another and can be shared between instances.
+
+    Proxy: The Proxy pattern provides a surrogate or placeholder for another object to control access to it. This pattern is useful when you want to create a system that controls access to an object, but without having to change the underlying object. An example usage of the Proxy pattern might be a security system that controls access to a file, but without having to change the underlying file.
 
 These are just a few examples of structural patterns, and there are many others as well. Structural patterns provide a way to organize objects and classes in a way that makes it easy to add new functionality, modify existing functionality, and scale the system as needed. By using structural patterns, software developers can create more flexible and maintainable software systems.
 
