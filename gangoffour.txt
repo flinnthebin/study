@@ -68,9 +68,6 @@ Some of the most commonly used creational patterns include:
 
     Prototype: The Prototype pattern creates new objects by cloning an existing object, rather than creating new objects from scratch. This pattern is useful when you want to create objects that are similar to existing objects, but with some modifications. An example usage of the Prototype pattern might be a document editor that allows users to create new documents based on existing templates, but with the ability to modify the content of the new document.
 
-These are just a few examples of creational patterns, and there are many others as well. Creational patterns provide a way to encapsulate the process of object creation and provide a way for the client to create objects without knowing how the objects are actually created. By using creational patterns, software developers can create more flexible and maintainable software systems.
-
-
 Structural patterns are design patterns that deal with the composition of classes and objects. The primary goal of structural patterns is to provide a solution to the problem of arranging objects and classes in a manner that is efficient and scalable, while still preserving the overall structure of the system. In other words, structural patterns aim to provide ways to organize objects and classes in a way that makes it easy to add new functionality, modify existing functionality, and scale the system as needed.
 
 Some of the most commonly used structural patterns include:
@@ -88,9 +85,6 @@ Some of the most commonly used structural patterns include:
     Flyweight: The Flyweight pattern uses sharing to support large numbers of fine-grained objects efficiently. This pattern is useful when you want to create a system that can manage a large number of objects, but where the memory overhead of creating these objects is too high. An example usage of the Flyweight pattern might be a game that manages a large number of characters, but where the characters are similar to one another and can be shared between instances.
 
     Proxy: The Proxy pattern provides a surrogate or placeholder for another object to control access to it. This pattern is useful when you want to create a system that controls access to an object, but without having to change the underlying object. An example usage of the Proxy pattern might be a security system that controls access to a file, but without having to change the underlying file.
-
-These are just a few examples of structural patterns, and there are many others as well. Structural patterns provide a way to organize objects and classes in a way that makes it easy to add new functionality, modify existing functionality, and scale the system as needed. By using structural patterns, software developers can create more flexible and maintainable software systems.
-
 
 Behavioral patterns are design patterns that deal with the communication between objects. The primary goal of behavioral patterns is to provide a solution to the problem of managing the flow of control between objects, while ensuring that the objects interact in a manner that is appropriate and well-defined. In other words, behavioral patterns aim to provide ways to manage the communication and interaction between objects in a way that is efficient, flexible, and maintainable.
 
@@ -117,9 +111,6 @@ Some of the most commonly used behavioral patterns include:
     Template Method: The Template Method pattern provides a way to define the skeleton of an algorithm, deferring some steps to subclasses. This pattern is useful when you want to create a system that can change the specific details of an algorithm, while still maintaining the overall structure of the algorithm. An example usage of the Template Method pattern might be a recipe for baking a cake, where the recipe provides the overall structure for baking the cake, but allows the baker to choose different ingredients and baking methods to create a unique cake.
 
     Visitor: The Visitor pattern provides a way to add new operations to existing classes, without changing the classes. This pattern is useful when you want to create a system that can perform operations on a collection of objects, without having to change the objects. An example usage of the Visitor pattern might be a shopping cart that can calculate the total cost of a collection of items, without having to change the individual items.
-
-These are just a few examples of behavioral patterns, and there are many others as well. Behavioral patterns provide a way to manage the communication and interaction between objects in a way that is efficient, flexible, and maintainable. By using behavioral patterns, software developers can create more flexible and maintainable software systems.
-
 
 Conclusion:
 
