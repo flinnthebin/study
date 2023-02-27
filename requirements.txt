@@ -1,0 +1,3 @@
+Expertise building high-performance real-time applications in languages such as Python, C++ or Go.
+Familiarity with distributed systems and technology, including networked systems and peer-to-peer technologies.
+Enthusiasm to work with new and unfamiliar technologies and a willingness to learn technical details necessary to develop highly successful trading strategies
