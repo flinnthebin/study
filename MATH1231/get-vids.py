@@ -1,0 +1,101 @@
+#!/usr/bin/env python
+import requests
+
+ALGEBRA = ["https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590803603704-lecture-01-closurevideo-a/63281EF1-A218-11EA-80B93A4DC65A5E0F/1590803603704-lecture-01-closurevideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590803645080-lecture-01-closurevideo-b/88E3B281-A218-11EA-80B93A4DC65A5E0F/1590803645080-lecture-01-closurevideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590803724135-lecture-02-vector-spacesvideo-a/B8950471-A218-11EA-80B93A4DC65A5E0F/1590803724135-lecture-02-vector-spacesvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590803788246-lecture-02-vector-spacesvideo-b/DCE34C61-A218-11EA-80B93A4DC65A5E0F/1590803788246-lecture-02-vector-spacesvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591081494602-lecture-03-subspacesvideo-a/6ABABE01-A49F-11EA-87875671DCD2F837/1591081494602-lecture-03-subspacesvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591081537087-lecture-03-subspacesvideo-b/8003CEF1-A49F-11EA-87875671DCD2F837/1591081537087-lecture-03-subspacesvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591143684390-math1231-algebra-lecture-04-spans-in-spacevideo-a/3A96DC41-A530-11EA-87875671DCD2F837/1591143684390-math1231-algebra-lecture-04-spans-in-spacevideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591143739263-math1231-algebra-lecture-04-spans-in-spacevideo-b/62BC9201-A530-11EA-87875671DCD2F837/1591143739263-math1231-algebra-lecture-04-spans-in-spacevideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591313678903-lecture-05-linear-independencevideo-a/0653F751-A6BC-11EA-B0568284BC3D3B7F/1591313678903-lecture-05-linear-independencevideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591313729580-lecture-05-linear-independencevideo-b/357AE391-A6BC-11EA-B0568284BC3D3B7F/1591313729580-lecture-05-linear-independencevideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591514889793-lecture-06-vector-spacesvideo-a/818A8F81-A890-11EA-A4A02E84791C7D8E/1591514889793-lecture-06-vector-spacesvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591514951477-lecture-06-vector-spacesvideo-b/A3AB4911-A890-11EA-A4A02E84791C7D8E/1591514951477-lecture-06-vector-spacesvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592018085590-lecture-07-span-independence-and-basisvideo-a/23E96E31-AD24-11EA-B0568284BC3D3B7F/1592018085590-lecture-07-span-independence-and-basisvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592018183737-lecture-07-span-independence-and-basisvideo-b/5BCF94A1-AD24-11EA-B0568284BC3D3B7F/1592018183737-lecture-07-span-independence-and-basisvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592037087753-lecture-08-linear-transformationsvideo-a/551E9D01-AD50-11EA-B0568284BC3D3B7F/1592037087753-lecture-08-linear-transformationsvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592037135013-lecture-08-linear-transformationsvideo-b/6AE171D0-AD50-11EA-B0568284BC3D3B7F/1592037135013-lecture-08-linear-transformationsvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592384824763-lecture-09-linear-transformations-on-concrete-spacesvideo-a/F5984571-B079-11EA-B0568284BC3D3B7F/1592384824763-lecture-09-linear-transformations-on-concrete-spacesvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592384869510-lecture-09-linear-transformations-on-concrete-spacesvideo-b/22D032F1-B07A-11EA-B0568284BC3D3B7F/1592384869510-lecture-09-linear-transformations-on-concrete-spacesvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592724711768-lecture-10-the-rank-nullity-theoremvideo-a/55616EE1-B391-11EA-A4A02E84791C7D8E/1592724711768-lecture-10-the-rank-nullity-theoremvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592724763801-lecture-10-the-rank-nullity-theoremvideo-b/73153161-B391-11EA-A4A02E84791C7D8E/1592724763801-lecture-10-the-rank-nullity-theoremvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593145947253-lecture-11-the-rank-nullity-theorem-continuedvideo-ab/463B4CA1-B766-11EA-B0568284BC3D3B7F/1593145947253-lecture-11-the-rank-nullity-theorem-continuedvideo-ab-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593294052295-lecture-12-eigenvalues-and-eigenvectorsvideo-a/F0F1B1D1-B8BE-11EA-B0568284BC3D3B7F/1593294052295-lecture-12-eigenvalues-and-eigenvectorsvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593172689737-lecture-12-eigenvalues-and-eigenvectorsvideo-b/11EFDA81-B7A5-11EA-B0568284BC3D3B7F/1593172689737-lecture-12-eigenvalues-and-eigenvectorsvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593294254348-lecture-13-diagonalisationvideo-ab/15C0BB21-B8C2-11EA-B0568284BC3D3B7F/1593294254348-lecture-13-diagonalisationvideo-ab-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593583258110-algebra-lecture-14matrix-powersvideo-ab/E756A051-BB60-11EA-B0568284BC3D3B7F/1593583258110-algebra-lecture-14matrix-powersvideo-ab-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593868504716-lecture-15-systems-of-desvideo-ab/80D89C81-BDF8-11EA-B0568284BC3D3B7F/1593868504716-lecture-15-systems-of-desvideo-ab-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593868665392-lecture-16-revision-of-basic-probabilityvideo-a/D44FA571-BDF8-11EA-B0568284BC3D3B7F/1593868665392-lecture-16-revision-of-basic-probabilityvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593868731656-lecture-16-revision-of-basic-probabilityvideo-b/F4074E41-BDF8-11EA-B0568284BC3D3B7F/1593868731656-lecture-16-revision-of-basic-probabilityvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593948510455-lecture-17-conditional-probabilityvideo-a/B6290861-BEB2-11EA-B0568284BC3D3B7F/1593948510455-lecture-17-conditional-probabilityvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593948570668-lecture-17-conditional-probabilityvideo-b/D6D8CCD1-BEB2-11EA-B0568284BC3D3B7F/1593948570668-lecture-17-conditional-probabilityvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594788907943-lecture-18-discrete-random-variablesvideoab/9C97A621-C657-11EA-A39BC2A8BD8D5158/1594788907943-lecture-18-discrete-random-variablesvideoab-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1595563049346-lecture-19-variance-and-special-distributionsvideo-a/D69E45C1-CD61-11EA-BBBAFA8260D7B5A1/1595563049346-lecture-19-variance-and-special-distributionsvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1595563088910-lecture-19-variance-and-special-distributionsvideo-b/FAA60ED1-CD61-11EA-BBBAFA8260D7B5A1/1595563088910-lecture-19-variance-and-special-distributionsvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1595420050948-lecture-20-binomial-distributions-and-the-sign-testvideo-a/EDB13F91-CC14-11EA-B0568284BC3D3B7F/1595420050948-lecture-20-binomial-distributions-and-the-sign-testvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1595420131996-lecture-20-binomial-distributions-and-the-sign-testvideo-b/184AB471-CC15-11EA-B0568284BC3D3B7F/1595420131996-lecture-20-binomial-distributions-and-the-sign-testvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1595545998850-lecture-21-continuous-random-variablesvideo-ab/2A5CBF21-CD3A-11EA-BBBAFA8260D7B5A1/1595545998850-lecture-21-continuous-random-variablesvideo-ab-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1595889015655-lecture-22-the-standard-normal-distributionvideo-a/CBFDAA81-D058-11EA-A4A02E84791C7D8E/1595889015655-lecture-22-the-standard-normal-distributionvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1595889065307-lecture-22-the-standard-normal-distributionvideo-b/2E2D02F1-D059-11EA-A4A02E84791C7D8E/1595889065307-lecture-22-the-standard-normal-distributionvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1595974997628-lecture-23-general-normal-distributionsvideo-a/3C12FF81-D123-11EA-B0568284BC3D3B7F/1595974997628-lecture-23-general-normal-distributionsvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1595976014973-lecture-23-general-normal-distributionsvideo-b/74A6CB11-D123-11EA-B0568284BC3D3B7F/1595976014973-lecture-23-general-normal-distributionsvideo-b-portalHigh-YouTube.mp4"
+]
+
+CALCULUS = [
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590798264264-lecture-01-partial-differentiationvideo-a/F632DD51-A20B-11EA-80B93A4DC65A5E0F/1590798264264-lecture-01-partial-differentiationvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590798318194-lecture-01-partial-differentiationvideo-b/1BB58691-A20C-11EA-80B93A4DC65A5E0F/1590798318194-lecture-01-partial-differentiationvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590798449416-lecture-02-tangent-planes-and-error-estimatesvideo-a/643EDC91-A20C-11EA-80B93A4DC65A5E0F/1590798449416-lecture-02-tangent-planes-and-error-estimatesvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590798498782-lecture-02-tangent-planes-and-error-estimatesvideo-b/8497CE71-A20C-11EA-80B93A4DC65A5E0F/1590798498782-lecture-02-tangent-planes-and-error-estimatesvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590798643683-lecture-03-chain-rulevideo-ab/E1F94B22-A20C-11EA-80B93A4DC65A5E0F/1590798643683-lecture-03-chain-rulevideo-ab-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590801768659-lecture-04-trigonometric-integralsvideo-a/1E3050F1-A214-11EA-80B93A4DC65A5E0F/1590801768659-lecture-04-trigonometric-integralsvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590801813637-lecture-04-trigonometric-integralsvideo-b/3A8287A1-A214-11EA-80B93A4DC65A5E0F/1590801813637-lecture-04-trigonometric-integralsvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590801872280-lecture-05-trigonometric-and-hyperbolic-substitutionsvideo-a/5E4690F1-A214-11EA-80B93A4DC65A5E0F/1590801872280-lecture-05-trigonometric-and-hyperbolic-substitutionsvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1590801973831-lecture-05-trigonometric-and-hyperbolic-substitutionsvideo-b/E7CBBA11-A216-11EA-80B93A4DC65A5E0F/1590801973831-lecture-05-trigonometric-and-hyperbolic-substitutionsvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591583359186-lecture-06-integration-by-partial-fractionsvideo-a/E5F1AF41-A92F-11EA-A4A02E84791C7D8E/1591583359186-lecture-06-integration-by-partial-fractionsvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591583401302-lecture-06-integration-by-partial-fractionsvideo-b/06C3EFD1-A930-11EA-A4A02E84791C7D8E/1591583401302-lecture-06-integration-by-partial-fractionsvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591583454260-lecture-07-integration-by-partial-fractions-continuedvideo-ab/31D79DC1-A930-11EA-A4A02E84791C7D8E/1591583454260-lecture-07-integration-by-partial-fractions-continuedvideo-ab-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591583524925-lecture-08-introduction-to-differential-equations-separable-desvideo-a/531BDA01-A930-11EA-A4A02E84791C7D8E/1591583524925-lecture-08-introduction-to-differential-equations-separable-desvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591583585448-lecture-08-introduction-to-differential-equations-separable-desvideo-b/7657C791-A930-11EA-A4A02E84791C7D8E/1591583585448-lecture-08-introduction-to-differential-equations-separable-desvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591583667108-lecture-09-first-order-linear-differential-equationsvideo-a/9CC1EAA1-A930-11EA-A4A02E84791C7D8E/1591583667108-lecture-09-first-order-linear-differential-equationsvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591583704677-lecture-09-first-order-linear-differential-equationsvideo-b/B4E5E0F1-A930-11EA-A4A02E84791C7D8E/1591583704677-lecture-09-first-order-linear-differential-equationsvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591583760940-lecture-10-first-order-exact-differential-equationsvideo-a/DC11CD61-A930-11EA-A4A02E84791C7D8E/1591583760940-lecture-10-first-order-exact-differential-equationsvideo-a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1591583813380-lecture-10-first-order-exact-differential-equationsvideo-b/F3C32BC1-A930-11EA-A4A02E84791C7D8E/1591583813380-lecture-10-first-order-exact-differential-equationsvideo-b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592999693877-math1231-calculus-lecture-11a/E7B99561-B611-11EA-BBBAFA8260D7B5A1/1592999693877-math1231-calculus-lecture-11a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1592999917841-math1231-calculus-lecture-11b/3C43F831-B614-11EA-BBBAFA8260D7B5A1/1592999917841-math1231-calculus-lecture-11b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593007190557-math1231-calculus-lecture-12a/218D9961-B623-11EA-BBBAFA8260D7B5A1/1593007190557-math1231-calculus-lecture-12a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593002394470-math1231-calculus-lecture-12b/50230D51-B61E-11EA-BBBAFA8260D7B5A1/1593002394470-math1231-calculus-lecture-12b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593005232379-math1231-calculus-lecture-12c/41CDF701-B61F-11EA-BBBAFA8260D7B5A1/1593005232379-math1231-calculus-lecture-12c-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593005999262-math1231-calculus-lecture-13b/8F62FFA1-B620-11EA-BBBAFA8260D7B5A1/1593005999262-math1231-calculus-lecture-13b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593005640582-math1231-calculus-lecture-13a/1E6537A1-B620-11EA-BBBAFA8260D7B5A1/1593005640582-math1231-calculus-lecture-13a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593005640582-math1231-calculus-lecture-13a/1E6537A1-B620-11EA-BBBAFA8260D7B5A1/1593005640582-math1231-calculus-lecture-13a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593006194891-math1231-calculus-lecture-14a/2E15DEF1-B622-11EA-BBBAFA8260D7B5A1/1593006194891-math1231-calculus-lecture-14a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593006878350-math1231-calculus-lecture-14b/D521B201-B622-11EA-BBBAFA8260D7B5A1/1593006878350-math1231-calculus-lecture-14b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593007280678-math1231-calculus-lecture-15a/9BA40631-B623-11EA-BBBAFA8260D7B5A1/1593007280678-math1231-calculus-lecture-15a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1593007488659-math1231-calculus-lecture-15b/56320CE1-B624-11EA-BBBAFA8260D7B5A1/1593007488659-math1231-calculus-lecture-15b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594791381572-math1231-calculus-lecture-16a/7E049871-C65D-11EA-A39BC2A8BD8D5158/1594791381572-math1231-calculus-lecture-16a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594791573560-math1231-calculus-lecture-16b/E9688221-C65D-11EA-A39BC2A8BD8D5158/1594791573560-math1231-calculus-lecture-16b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594791955831-math1231-calculus-lecture-17a/ED37E431-C65E-11EA-A39BC2A8BD8D5158/1594791955831-math1231-calculus-lecture-17a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594794311997-math1231-calculus-lecture-17b/5EE35F11-C664-11EA-A39BC2A8BD8D5158/1594794311997-math1231-calculus-lecture-17b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594793916610-math1231-calculus-lecture-18a/E046CDE1-C663-11EA-A39BC2A8BD8D5158/1594793916610-math1231-calculus-lecture-18a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594793781984-math1231-calculus-lecture-18b/F355E9D1-C662-11EA-A39BC2A8BD8D5158/1594793781984-math1231-calculus-lecture-18b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594794768048-math1231-calculus-lecture-19a/3E195F11-C668-11EA-A39BC2A8BD8D5158/1594794768048-math1231-calculus-lecture-19a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594796196066-math1231-calculus-lecture-19b/E9955D81-C668-11EA-A39BC2A8BD8D5158/1594796196066-math1231-calculus-lecture-19b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594796506742-math1231-calculus-lecture-20ab/881C23C1-C66A-11EA-A39BC2A8BD8D5158/1594796506742-math1231-calculus-lecture-20ab-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594797928165-math1231-calculus-lecture-21a/3054CC21-C66D-11EA-A39BC2A8BD8D5158/1594797928165-math1231-calculus-lecture-21a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594798371008-math1231-calculus-lecture-21b/AA7B7021-C66E-11EA-A39BC2A8BD8D5158/1594798371008-math1231-calculus-lecture-21b-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594800454561-math1231-calculus-lecture-22a/092352B1-C673-11EA-A39BC2A8BD8D5158/1594800454561-math1231-calculus-lecture-22a-portalHigh-YouTube.mp4",
+ "https://d2xnkjysn6lg7q.cloudfront.net/files/unswVideo/transcodes/1594817241435-math1231-calculus-lecture-22b/C551F4C1-C699-11EA-A39BC2A8BD8D5158/1594817241435-math1231-calculus-lecture-22b-portalHigh-YouTube.mp4"
+]
+
+#for i in range(len(ALGEBRA)):
+#    response = requests.get(ALGEBRA[i])
+#    with open(f'algebra-{i:02d}.mp4', 'wb') as f:
+#        f.write(response.content)
+
+for j in range(len(CALCULUS)):
+    response = requests.get(CALCULUS[j])
+    with open(f'calculus-{j:02d}.mp4', 'wb') as f:
+        f.write(response.content)
+
